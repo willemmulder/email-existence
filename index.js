@@ -68,6 +68,7 @@ module.exports = function (email, callback, timeout, from_email) {
 
 				});
 				conn.on('timeout', function () {
+					err = 'timeout';
 					conn.emit('undetermined');
 				});
 				conn.on('data', function(data) {
@@ -77,6 +78,7 @@ module.exports = function (email, callback, timeout, from_email) {
 						err = data.toString();
 						conn.emit('false');
 					} else {
+						err = data;
 						conn.emit('undetermined');
 					}
 				});
