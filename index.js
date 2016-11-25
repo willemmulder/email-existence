@@ -27,7 +27,8 @@ module.exports = function (email, callback, timeout, from_email) {
 			var i = 0;
 			conn.setEncoding('ascii');
 			conn.setTimeout(timeout);
-			conn.on('error', function() {
+			conn.on('error', function(error) {
+				err = error;
 				conn.emit('false');
 			});
 			conn.on('false', function () {
@@ -81,8 +82,8 @@ module.exports = function (email, callback, timeout, from_email) {
 			});
 		}, function () {
 			return j < addresses.length && cond
-		},function (err) {
-			callback(err, res, undetermined);
+		},function (error) {
+			callback(error, res, undetermined);
 		})
 	});
 };
