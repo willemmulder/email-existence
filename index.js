@@ -74,6 +74,7 @@ module.exports = function (email, callback, timeout, from_email) {
 					if(data.indexOf("220") == 0 || data.indexOf("250") == 0 || data.indexOf("\n220") != -1 || data.indexOf("\n250") != -1) {
 						conn.emit('prompt');
 					} else if(data.indexOf("\n550") != -1 || data.indexOf("550") == 0) {
+						err = data.toString();
 						conn.emit('false');
 					} else {
 						conn.emit('undetermined');
